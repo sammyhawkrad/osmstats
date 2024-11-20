@@ -45,6 +45,6 @@ Top 10 editors:
 #OpenStreetMap #OSM #OpenData #OSMstats
 """
 
-#response = client.create_tweet(text=tweet_text)
+response = client.create_tweet(text=tweet_text)
 
-print(tweet_text)
+print(response)
