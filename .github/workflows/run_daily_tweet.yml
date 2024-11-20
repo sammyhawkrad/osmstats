@@ -2,7 +2,8 @@ name: Run Daily Tweet
 
 on:
   schedule:
-    - cron: '30 13 * * *'
+    - cron: '0 8 * * *'
+  workflow_dispatch:  # Add this line to enable manual triggering
 
 jobs:
   run-daily-tweet:
