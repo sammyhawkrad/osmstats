@@ -14,37 +14,32 @@ consumer_secret = os.environ.get("CONSUMER_SECRET")
 access_token = os.environ.get("ACCESS_TOKEN")
 access_token_secret = os.environ.get("ACCESS_TOKEN_SECRET")
 
-client = tweepy.Client(
-    consumer_key=consumer_key, consumer_secret=consumer_secret,
-    access_token=access_token, access_token_secret=access_token_secret
-)
+print(consumer_key, consumer_secret, access_token, access_token_secret)
 
-tweet_text = f"""
-OSM Daily Stats 📊
+if __name__ == "__main__":
+    client = tweepy.Client(
+        consumer_key=consumer_key, consumer_secret=consumer_secret,
+        access_token=access_token, access_token_secret=access_token_secret
+    )
 
-Number of users: {format_number(report['Number of users'])} 👥
+    tweet_text = f"""
+    OSM Daily Stats 📊
+    
+    Users: {format_number(report['Number of users'])} 👥
 
-Number of users that...
-edited nodes: {format_number(number_of_editors[1]['Day'])} ✏️
-uploaded GPX files: {format_number(number_of_editors[0]['Day'])} 🗺️
+    Users that...
+    edited nodes: {format_number(number_of_editors[1]['Day'])} ✏️
+    uploaded GPX: {format_number(number_of_editors[0]['Day'])} 🗺️
 
-Top 10 editors:
-1. {top_users[0][1]} - {format_number(top_users[0][0])} 🥇
-2. {top_users[1][1]} - {format_number(top_users[1][0])} 🥈
-3. {top_users[2][1]} - {format_number(top_users[2][0])} 🥉
-4. {top_users[3][1]} - {format_number(top_users[3][0])}
-5. {top_users[4][1]} - {format_number(top_users[4][0])}
-6. {top_users[5][1]} - {format_number(top_users[5][0])}
-7. {top_users[6][1]} - {format_number(top_users[6][0])}
-8. {top_users[7][1]} - {format_number(top_users[7][0])}
-9. {top_users[8][1]} - {format_number(top_users[8][0])}
-10. {top_users[9][1]} - {format_number(top_users[9][0])}
+    Top 3 editors:
+    1. {top_users[0][1]} - {format_number(top_users[0][0])} 🥇
+    2. {top_users[1][1]} - {format_number(top_users[1][0])} 🥈
+    3. {top_users[2][1]} - {format_number(top_users[2][0])} 🥉
 
-{report_run_at}
+    #OpenStreetMap #OSM #OSMstats
+    """
 
-#OpenStreetMap #OSM #OpenData #OSMstats
-"""
+    response = client.create_tweet(text=tweet_text)
 
-response = client.create_tweet(text=tweet_text)
-
-print(response)
+    print(response)
+    print(len(tweet_text))
