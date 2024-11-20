@@ -14,8 +14,6 @@ consumer_secret = os.environ.get("CONSUMER_SECRET")
 access_token = os.environ.get("ACCESS_TOKEN")
 access_token_secret = os.environ.get("ACCESS_TOKEN_SECRET")
 
-print(consumer_key, consumer_secret, access_token, access_token_secret)
-
 if __name__ == "__main__":
     client = tweepy.Client(
         consumer_key=consumer_key, consumer_secret=consumer_secret,
