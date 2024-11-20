@@ -3,7 +3,7 @@ name: Run Daily Tweet
 on:
   schedule:
     - cron: '0 8 * * *'
-  workflow_dispatch:  # Add this line to enable manual triggering
+  workflow_dispatch:
 
 jobs:
   run-daily-tweet:
@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.x'
 
