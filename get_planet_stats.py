@@ -64,6 +64,3 @@ def get_planet_stats():
 if __name__ == "__main__":
     report_run_at, report, number_of_editors, top_users = get_planet_stats()
     print("Report Run At:", report_run_at)
-    print("Report:", report)
-    print("Number of Editors:", number_of_editors)
-    print("Top Users:", top_users)
