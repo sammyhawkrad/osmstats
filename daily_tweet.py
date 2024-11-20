@@ -20,22 +20,21 @@ if __name__ == "__main__":
         access_token=access_token, access_token_secret=access_token_secret
     )
 
-    tweet_text = f"""
-    OSM Daily Stats 📊
-    
-    Users: {format_number(report['Number of users'])} 👥
+    tweet_text = (
+        "OSM Daily Stats 📊\n\n"
+        f"Users: {format_number(report['Number of users'])} 👥\n\n"
+        "Users that...\n"
+        f"edited nodes: {format_number(number_of_editors[1]['Day'])} ✏️\n"
+        f"uploaded GPX: {format_number(number_of_editors[0]['Day'])} 🗺️\n\n"
+        "Top 3 editors:\n"
+        f"1. {top_users[0][1]} - {format_number(top_users[0][0])} 🥇\n"
+        f"2. {top_users[1][1]} - {format_number(top_users[1][0])} 🥈\n"
+        f"3. {top_users[2][1]} - {format_number(top_users[2][0])} 🥉\n\n"
 
-    Users that...
-    edited nodes: {format_number(number_of_editors[1]['Day'])} ✏️
-    uploaded GPX: {format_number(number_of_editors[0]['Day'])} 🗺️
-
-    Top 3 editors:
-    1. {top_users[0][1]} - {format_number(top_users[0][0])} 🥇
-    2. {top_users[1][1]} - {format_number(top_users[1][0])} 🥈
-    3. {top_users[2][1]} - {format_number(top_users[2][0])} 🥉
-
-    #OpenStreetMap #OSM #OSMstats
-    """
+        f"{report_run_at}\n\n"
+        
+        "#OpenStreetMap #OSM #OSMstats"
+    )
 
     response = client.create_tweet(text=tweet_text)
 
