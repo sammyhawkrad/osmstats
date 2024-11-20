@@ -30,13 +30,17 @@ OSMStats is a Python bot for tweeting OpenStreetMap statistics.
     export ACCESS_TOKEN="your_access_token"
     export ACCESS_TOKEN_SECRET="your_access_token_secret"
     ```
+5. Specify the period (Day, Week, Month) you want to tweet for:
 
+    ```sh
+    export SCHEDULE = "Day"
+    ```
 
 ## Usage
 
 Run script to Tweet:
 ```sh
-python daily_tweet.py
+python tweet.py
 ```
 
 

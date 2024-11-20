@@ -6,13 +6,22 @@ from get_planet_stats import get_planet_stats
 def format_number(number):
     return f"{int(number):,}"
 
-report_run_at, report, number_of_editors, top_users = get_planet_stats()
-top_users = top_users['Week']
+schedule = os.environ.get("SCHEDULE")
+
+SCHEDULE = {
+    "Day": "OSM Daily Stats 📊",
+    "Week": "OSM Weekly Stats 📊",
+    "Month": "OSM Monthly Stats 📊"
+}
 
 consumer_key = os.environ.get("CONSUMER_KEY")
 consumer_secret = os.environ.get("CONSUMER_SECRET")
 access_token = os.environ.get("ACCESS_TOKEN")
 access_token_secret = os.environ.get("ACCESS_TOKEN_SECRET")
+
+report_run_at, report, number_of_editors, top_users = get_planet_stats()
+top_users = top_users[schedule]
+
 
 if __name__ == "__main__":
     client = tweepy.Client(
@@ -21,11 +30,11 @@ if __name__ == "__main__":
     )
 
     tweet_text = (
-        "OSM Weekly Stats 📊\n\n"
+        f"{SCHEDULE[schedule]}\n\n"
         f"Users: {format_number(report['Number of users'])} 👥\n\n"
         "Users that...\n"
-        f"edited nodes: {format_number(number_of_editors[1]['Week'])} ✏️\n"
-        f"uploaded GPX: {format_number(number_of_editors[0]['Week'])} 🗺️\n\n"
+        f"edited nodes: {format_number(number_of_editors[1]['Day'])} ✏️\n"
+        f"uploaded GPX: {format_number(number_of_editors[0]['Day'])} 🗺️\n\n"
         "Top 3 editors:\n"
         f"1. {top_users[0][1]} - {format_number(top_users[0][0])} 🥇\n"
         f"2. {top_users[1][1]} - {format_number(top_users[1][0])} 🥈\n"
@@ -38,5 +47,5 @@ if __name__ == "__main__":
 
     response = client.create_tweet(text=tweet_text)
 
-    print(response)
+    print(tweet_text)
     print(len(tweet_text))
