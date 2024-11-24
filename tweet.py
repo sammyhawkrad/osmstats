@@ -8,7 +8,7 @@ def format_number(number):
 
 schedule = os.environ.get("SCHEDULE")
 
-SCHEDULE = {
+TWEET_TITLE = {
     "Day": "OSM Daily Stats 📊",
     "Week": "OSM Weekly Stats 📊",
     "Month": "OSM Monthly Stats 📊"
@@ -30,11 +30,11 @@ if __name__ == "__main__":
     )
 
     tweet_text = (
-        f"{SCHEDULE[schedule]}\n\n"
+        f"{TWEET_TITLE[schedule]}\n\n"
         f"Users: {format_number(report['Number of users'])} 👥\n\n"
         "Users that...\n"
-        f"edited nodes: {format_number(number_of_editors[1]['Day'])} ✏️\n"
-        f"uploaded GPX: {format_number(number_of_editors[0]['Day'])} 🗺️\n\n"
+        f"edited nodes: {format_number(number_of_editors[1][schedule])} ✏️\n"
+        f"uploaded GPX: {format_number(number_of_editors[0][schedule])} 🗺️\n\n"
         "Top 3 editors:\n"
         f"1. {top_users[0][1]} - {format_number(top_users[0][0])} 🥇\n"
         f"2. {top_users[1][1]} - {format_number(top_users[1][0])} 🥈\n"
