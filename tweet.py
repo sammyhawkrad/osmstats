@@ -1,4 +1,5 @@
 import tweepy
+from tweepy.errors import Forbidden
 import os
 
 from get_planet_stats import get_planet_stats
@@ -42,10 +43,15 @@ if __name__ == "__main__":
 
         f"{report_run_at}\n\n"
         
-        "#OpenStreetMap #OSM #OSMstats"
+        "#OSMstats #OSM #OpenStreetMap"
     )
 
-    response = client.create_tweet(text=tweet_text)
+    try:
+        response = client.create_tweet(text=tweet_text)
+    except Forbidden:
+        while len(tweet_text) > 280:
+            tweet_text = tweet_text[:tweet_text.rfind("#")].strip()
+        response = client.create_tweet(text=tweet_text)
 
     print(tweet_text)
     print(len(tweet_text))
